@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Workshop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f38b1c; /* Orange background matching the image border */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .banner {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 1100px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Top header mimicking the template */
+        .banner-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+
+        .banner-header h4 {
+            color: #f38b1c;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .banner-header span {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 40px;
+            justify-content: space-between;
+        }
+
+        /* Left Side: Details */
+        .left-side {
+            flex: 1;
+            max-width: 55%;
+        }
+
+        .subtitle {
+            color: #f38b1c;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            color: #0f1f3d;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .meta-item i {
+            color: #0f1f3d;
+            font-size: 1.2rem;
+        }
+
+        .meta-text span {
+            display: block;
+            font-size: 0.75rem;
+            color: #888;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        .details-text {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .details-text ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .details-text li {
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #e0e4eb;
+            color: #0f1f3d;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #d0d5e0;
+        }
+
+        /* Right Side: Speaker Cards */
+        .right-side {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            align-items: flex-end;
+            justify-content: flex-end;
+        }
+
+        .speaker-card {
+            position: relative;
+            width: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .speaker-tag {
+            background-color: #0f1f3d;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            position: absolute;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .speaker-tag::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px 8px 0;
+            border-style: solid;
+            border-color: #0f1f3d transparent transparent transparent;
+        }
+
+        .speaker-tag i {
+            color: #4da6ff;
+            background: white;
+            border-radius: 50%;
+            font-size: 0.6rem;
+            padding: 2px;
+        }
+
+        .speaker-image-container {
+            width: 100%;
+            height: 220px;
+            background-color: #f38b1c;
+            margin-top: 30px;
+            /* Angled cut effect matching the image */
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 3rem;
+        }
+
+        .speaker-info {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .speaker-info h4 {
+            color: #0f1f3d;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .speaker-info p {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            .left-side {
+                max-width: 100%;
+            }
+            .title {
+                font-size: 2.2rem;
+            }
+            .right-side {
+                justify-content: center;
+                margin-top: 20px;
+            }
+        }
+        @media (max-width: 500px) {
+            .right-side {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banner">
+        <div class="banner-header">
+            <h4>Workshop Invitation</h4>
+            <span></span>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Left Side: Event Details -->
+            <div class="left-side">
+                <div class="subtitle">Let's join our</div>
+                <div class="title">Machine Learning<br>Workshop</div>
+                
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <i class="fa-regular fa-clock"></i>
+                        <div class="meta-text">
+                            Time
+                            <span>02.30PM TO 04PM</span>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fa-regular fa-calendar"></i>
+                        <div class="meta-text">
+                            Date
+                            <span>November 26, 2026</span>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div class="meta-text">
+                            Venue
+                            <span>MCE Computer Lab</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details-text">
+                    <p><strong>A Hands-on Workshop for Civil Engineers (Duration: 1.5 - 2.0 Hours)</strong></p>
+                    <p style="margin-top: 10px;">Machine learning offers new ways to analyze data and solve engineering problems. This interactive workshop introduces students to different ML approaches, data types, and applications in civil engineering.</p>
+                    
+                    <ul>
+                        <li>Applications in civil engineering</li>
+                        <li>Data types and suitable ML models</li>
+                        <li>Basic data preparation & model selection</li>
+                        <li>Hands-on demonstrations</li>
+                    </ul>
+                    <p style="margin-top: 10px; font-size: 0.85rem;"><em>Target Audience: Undergraduate Civil Engineering students. No prior programming knowledge required.</em></p>
+                </div>
+
+                <a href="#" class="btn">LET'S UPSKILL TOGETHER! </a>
+            </div>
+
+            <!-- Right Side: Speakers / Organizers -->
+            <div class="right-side">
+                <!-- Card 1: Resource Person -->
+                <div class="speaker-card">
+                    <div class="speaker-tag">Resource Person <i class="fa-solid fa-check"></i></div>
+                    <div class="speaker-image-container">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <div class="speaker-info">
+                        <h4>Dr. M. Danish Zia</h4>
+                        <p>Assistant Professor, MCE</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Organizer -->
+                <div class="speaker-card">
+                    <div class="speaker-tag">Organized By <i class="fa-solid fa-check"></i></div>
+                    <div class="speaker-image-container">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <div class="speaker-info">
+                        <h4>Department of</h4>
+                        <p>Civil-Engineering</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
